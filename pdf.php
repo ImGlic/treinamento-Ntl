@@ -103,13 +103,13 @@ class PDF extends FPDF
         $pdf->setY(30);
         $pdf->SetFont($tipoDeFonte, $fontWeight, $tamanhoFonte);
         $pdf->setX(10);
-        $pdf->MultiCell(50, 5, iconv('UTF-8', 'windows-1252', 'NOME'), 1, 0, "C", 0);
+        $pdf->MultiCell(60, 5, iconv('UTF-8', 'windows-1252', 'NOME'), 1, 0, "C", 0);
         $pdf->SetFont($tipoDeFonte, '', 8);
 
         $pdf->setY(30);
         $pdf->SetFont($tipoDeFonte, $fontWeight, $tamanhoFonte);
-        $pdf->setX(60);
-        $pdf->MultiCell(37, 5, iconv('UTF-8', 'windows-1252', 'DATA DE NASCIMENTO'), 1, 0, "C", 0); //Cell(20, -1, iconv('UTF-8', 'windows-1252', 'DATA DE NASCIMENTO'), 0, 0, "C", 0);
+        $pdf->setX(70);
+        $pdf->MultiCell(27, 5, iconv('UTF-8', 'windows-1252', 'NASCIMENTO'), 1 ,"C", 1,0); //Cell(20, -1, iconv('UTF-8', 'windows-1252', 'DATA DE NASCIMENTO'), 0, 0, "C", 0);
         $pdf->SetFont($tipoDeFonte, '', 8);
 
         $pdf->setY(30);
@@ -217,13 +217,13 @@ class PDF extends FPDF
             $pdf->setY($i);
             $pdf->SetFont($tipoDeFonte, $fontWeight, $tamanhoFonteMenor);
             $pdf->setX(10);
-            $pdf->MultiCell(50, 5, iconv('UTF-8', 'windows-1252', strtoupper($nome)), 1, "L", 0);
+            $pdf->MultiCell(60, 5, iconv('UTF-8', 'windows-1252', strtoupper($nome)), 1, "L", 0);
             $pdf->SetFont($tipoDeFonte, '', 8);
 
             $pdf->setY($i);
             $pdf->SetFont($tipoDeFonte, $fontWeight, $tamanhoFonteMenor);
-            $pdf->setX(60);
-            $pdf->MultiCell(37, 5, $dataNascimento, 1, 'C', 0); //Cell(20, -1, iconv('UTF-8', 'windows-1252', $dataNascimento ), 0, 0, "C", 0);
+            $pdf->setX(70);
+            $pdf->MultiCell(27, 5, $dataNascimento, 1, 'C', 0); //Cell(20, -1, iconv('UTF-8', 'windows-1252', $dataNascimento ), 0, 0, "C", 0);
             $pdf->SetFont($tipoDeFonte, '', 8);
 
             $pdf->setY($i);
