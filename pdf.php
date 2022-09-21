@@ -68,12 +68,10 @@ class PDF extends FPDF
         $this->Image('C:\inetpub\wwwroot\Cadastro\img\ntl_logo-removebg-preview.png', 63, 110, 90,);
         $this->Ln(24); #Quebra de Linhas
     }
-
     function Footer()
     {
         $this->Image('C:\inetpub\wwwroot\Cadastro\img\footerPdf.png', 1, 279, 213);
     }
-
     static function dadosGerais()
     {
         $pdf = new PDF('P', 'mm', 'A4'); #Crio o PDF padrão RETRATO, Medida em Milímetro e papel A$
@@ -89,9 +87,6 @@ class PDF extends FPDF
         $tipoDeFonte = 'Courier';
         $fontWeight = 'B';
         $marginTop = 18;
-
-        // $pdf->Line(5, 5, 205, 5); //primeira linha
-        $pdf->Line(5, 280, 205, 280);
 
         $pdf->setY(20);
         $pdf->SetFont($tipoDeFonte, $fontWeight, $tamanhoFonte);
@@ -167,7 +162,7 @@ class PDF extends FPDF
         $z = $pdf->GetY(276);
 
         foreach ($resultQuery as $row) {
-            $nome = ucfirst($row['nome']);
+            $nome = rtrim(ucfirst($row['nome']));
             // $nome = 'Adriana Giovanna Ester de Paula';
             $splitName = explode(" ", $nome);
             $quantidadeNome = count($splitName);
@@ -175,14 +170,7 @@ class PDF extends FPDF
 
             if ($quantidadeNome > 3) {
                 if (count($splitName) > 1) {
-
                     for ($a = 1; (count($splitName) - 2) > $a; $a++) {
-                        if (strlen($splitName[$a]) >= 3) {
-                            $splitName[$a] = substr($splitName[$a], 0, 1) . ".";
-                            $nome = implode(" ", $splitName);
-                        }
-                    }
-                    for ($a = 1; (count($splitName) - 3) > $a; $a++) {
                         if (strlen($splitName[$a]) >= 3) {
                             $splitName[$a] = substr($splitName[$a], 0, 1) . ".";
                             $nome = implode(" ", $splitName);
@@ -267,7 +255,6 @@ class PDF extends FPDF
         $pdf->Ln(8);
         $pdf->Output();
     }
-
     static function dadosFuncionario()
     {
         $id = $_GET['id'];

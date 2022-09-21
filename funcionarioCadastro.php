@@ -138,6 +138,7 @@ include "inc/nav.php";
                                                                 <label class="label">Gênero</label>
                                                                 <label class="select">
                                                                     <select id="descricao" name="descricao">
+                                                                        <option ></option>
                                                                         <?php
                                                                         $reposit = new reposit();
                                                                         $sql = "SELECT codigo,descricao
