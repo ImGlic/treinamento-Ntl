@@ -775,12 +775,14 @@ class PDF extends FPDF
             foreach ($result as $row) {
                 $estadoCivil = $row['descricao'];
 
-                $pdf->setY(46);
+                
+            }
+
+            $pdf->setY(46);
                 $pdf->SetFont($tipoDeFonte, $fontWeight, $tamanhoFonte);
                 $pdf->setX(35);
                 $pdf->MultiCell(35, 5, iconv('UTF-8', 'windows-1252', $estadoCivil), 0, "L", 0);
                 $pdf->SetFont($tipoDeFonte, 'I', 8);
-            }
 
             $pdf->setY(46);
             $pdf->SetFont($tipoDeFonte, $fontWeight, $tamanhoFonte);
