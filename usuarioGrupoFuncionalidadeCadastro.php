@@ -7,24 +7,24 @@ require_once("inc/init.php");
 require_once("inc/config.ui.php");
 
 //colocar o tratamento de permissão sempre abaixo de require_once("inc/config.ui.php");
-$condicaoAcessarOK = (in_array('PERMISSAOUSUARIO_ACESSAR', $arrayPermissao, true));
-$condicaoGravarOK = (in_array('PERMISSAOUSUARIO_GRAVAR', $arrayPermissao, true));
-$condicaoExcluirOK = (in_array('PERMISSAOUSUARIO_EXCLUIR', $arrayPermissao, true));
+$condicaoAcessarOK = true ;
+$condicaoGravarOK = true;
+$condicaoExcluirOK = true ;
 
-if ($condicaoAcessarOK == false) {
-    unset($_SESSION['login']);
-    header("Location:login.php");
-}
+// if ($condicaoAcessarOK == false) {
+//     unset($_SESSION['login']);
+//     header("Location:login.php");
+// }
 
-$esconderBtnGravar = "";
-if ($condicaoGravarOK === false) {
-    $esconderBtnGravar = "none";
-}
+// $esconderBtnGravar = "";
+// if ($condicaoGravarOK === false) {
+//     $esconderBtnGravar = "none";
+// }
 
-$esconderBtnExcluir = "";
-if ($condicaoExcluirOK === false) {
-    $esconderBtnExcluir = "none";
-}
+// $esconderBtnExcluir = "";
+// if ($condicaoExcluirOK === false) {
+//     $esconderBtnExcluir = "none";
+// }
 
 
 /* ---------------- PHP Custom Scripts ---------

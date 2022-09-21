@@ -6,9 +6,8 @@ require_once("inc/init.php");
 require_once("inc/config.ui.php");
 
 //colocar o tratamento de permissão sempre abaixo de require_once("inc/config.ui.php");
-$condicaoAcessarOK = (true);
-
-$condicaoGravarOK = (true);
+$condicaoAcessarOK = true;
+$condicaoGravarOK =  true;
 
 if ($condicaoAcessarOK == false) {
     unset($_SESSION['login']);
@@ -25,7 +24,7 @@ if ($condicaoGravarOK === false) {
   YOU CAN SET CONFIGURATION VARIABLES HERE BEFORE IT GOES TO NAV, RIBBON, ETC.
   E.G. $page_title = "Custom Title" */
 
-$page_title = "Grupo";
+$page_title = "Dependentes Filtros";
 
 /* ---------------- END PHP Custom Scripts ------------- */
 
@@ -37,7 +36,7 @@ include("inc/header.php");
 
 //include left panel (navigation)
 //follow the tree in inc/config.ui.php
-$page_nav["configuracao"]["sub"]["grupo"]["active"] = true;
+$page_nav["configuracao"]["sub"]["dependenteFiltro"]["active"] = true;
 
 include("inc/nav.php");
 ?>
@@ -61,7 +60,7 @@ include("inc/nav.php");
                     <div class="jarviswidget" id="wid-id-1" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-deletebutton="false" data-widget-sortable="false">
                         <header>
                             <span class="widget-icon"><i class="fa fa-cog"></i></span>
-                            <h2>Usuário</h2>
+                            <h2>Dependentes</h2>
                         </header>
                         <div>
                             <div class="widget-body no-padding">
@@ -80,27 +79,36 @@ include("inc/nav.php");
                                             <div id="collapseFiltro" class="panel-collapse collapse in">
                                                 <div class="panel-body no-padding">
                                                     <fieldset>
-                                                        <div class="row">
-                                                            <section class="col col-6">
-                                                                <label class="label">Descrição</label>
-                                                                <label class="input"><i class="icon-prepend fa fa-user"></i>
-                                                                    <input id="nome" maxlength="50" name="nome" type="text" value="">
-                                                                </label>
-                                                            </section>
-                                                        </div>
-                                                    </fieldset>
+                                                        <section class="col col-2">
+                                                            <label class="label">Tipo Dependente</label>
+                                                            <label class="input"><i class="icon-prepend fa fa-user"></i>
+                                                                <input type="text" id="descricao" nome="descricao">
+                                                            </label>
+                                                        </section>
+                                                        <section class="col col-1 col-auto">
+                                                            <label class="label" for="ativo">Ativo</label>
+                                                            <label class="select">
+                                                                <select id="ativo" name="ativo" class="">
+                                                                    <option></option>
+                                                                    <option value='1'>Sim</option>
+                                                                    <option value='0'>Não</option>
+                                                                </select>
+                                                            </label>
+                                                        </section>
                                                 </div>
-                                                <footer>
-                                                    <button id="btnSearch" type="button" class="btn btn-primary pull-right" title="Buscar">
-                                                        <span class="fa fa-search"></span>
-                                                    </button>
-                                                    <?php if ($condicaoGravarOK) { ?>
-                                                        <button id="btnNovo" type="button" class="btn btn-primary pull-left" title="Novo">
-                                                            <span class="fa fa-file"></span>
-                                                        </button>
-                                                    <?php } ?>
-                                                </footer>
+                                                </fieldset>
                                             </div>
+
+                                            <footer>
+                                                <button id="btnSearch" type="button" class="btn btn-primary pull-right" title="Buscar">
+                                                    <span class="fa fa-search"></span>
+                                                </button>
+                                                <?php if ($condicaoGravarOK) { ?>
+                                                    <button id="btnNovo" type="button" class="btn btn-primary pull-left" title="Novo">
+                                                        <span class="fa fa-file"></span>
+                                                    </button>
+                                                <?php } ?>
+                                            </footer>
                                         </div>
                                     </div>
                                 </form>
@@ -160,22 +168,16 @@ include("inc/scripts.php");
     });
 
     function listarFiltro() {
-        var nome = $('#nome').val();
+        var dependentes = $('#descricao').val();
+        var ativo = $('#ativo').val();
 
-        $('#resultadoBusca').load('usuarioGrupoFiltroListagem.php?', {
-            nomeFiltro: nome
+        $('#resultadoBusca').load('dependentesListagem.php?', {
+            dependentesFiltro: dependentes,
+            ativo: ativo
         });
     }
 
-    function listarFiltro() {
-
-        var nome = $('#nome').val();
-       
-        var parametrosUrl = '&nome=' + nome;
-        $('#resultadoBusca').load('usuarioGrupoFiltroListagem.php?' + parametrosUrl);
-    }
-
     function novo() {
-        $(location).attr('href', 'usuarioGrupoCadastro.php');
+        $(location).attr('href', 'dependentesCadastro.php');
     }
 </script>

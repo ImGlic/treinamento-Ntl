@@ -55,7 +55,7 @@ function grava()
     $descricaoMT = formatarString($_POST['cboDescricao']);
     $codigoCargoSCI = (int) $_POST['codigoCargoSCI'];
 
-    $sql = 'Ntl.cargo_Atualiza ' . $id . ',' . $ativo . ',' . $descricao . ',' . $cbo . ',' . $descricaoMT . ',' . $usuario . ',' . $codigoCargoSCI . ' ';
+    $sql = 'dbo.funcionario ' . $id . ',' . $ativo . ',' . $descricao . ',' . $cbo . ',' . $descricaoMT . ',' . $usuario . ',' . $codigoCargoSCI . ' ';
 
     $reposit = new reposit();
     $result = $reposit->Execprocedure($sql);
@@ -93,10 +93,10 @@ function recupera()
         $loginPesquisa = $_POST["loginPesquisa"];
     }
 
-    $sql = "SELECT C.codigo,C.ativo,C.descricao,C.cbo,C.descricaoMT,C.codigoCargoSCI from Ntl.cargo C WHERE (0 = 0)";
+    $sql = "SELECT codigo, nome, ativo, cpf, dataNascimento  from dbo.funcionario  WHERE (0 = 0)";
 
     if ($condicaoId) {
-        $sql = $sql . " AND C.[codigo] = " . $cargoIdPesquisa . " ";
+        $sql = $sql . " AND [codigo] = " . $cargoIdPesquisa . " ";
     }
 
     $reposit = new reposit();

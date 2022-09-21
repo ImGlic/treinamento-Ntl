@@ -7,9 +7,9 @@ require_once("inc/init.php");
 require_once("inc/config.ui.php");
 
 //colocar o tratamento de permissão sempre abaixo de require_once("inc/config.ui.php");
-$condicaoAcessarOK = (in_array('PERMISSAOUSUARIO_ACESSAR', $arrayPermissao, true));
-$condicaoGravarOK = (in_array('PERMISSAOUSUARIO_GRAVAR', $arrayPermissao, true));
-$condicaoExcluirOK = (in_array('PERMISSAOUSUARIO_EXCLUIR', $arrayPermissao, true));
+$condicaoAcessarOK =  true;
+$condicaoGravarOK =  true;
+$condicaoExcluirOK =  true;
 
 if ($condicaoAcessarOK == false) {
     unset($_SESSION['login']);
@@ -46,6 +46,7 @@ include("inc/header.php");
 //follow the tree in inc/config.ui.php
 $page_nav["configuracao"]["sub"]["permissoesUsuarios"]["active"] = true;
 
+include("inc/header.php");
 
 include("inc/nav.php");
 ?>
