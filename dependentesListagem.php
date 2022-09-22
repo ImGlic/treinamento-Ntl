@@ -14,12 +14,13 @@ include "js/repositorio.php";
             <tbody>
                 <?php
                 $dependentesFiltro = "";
-                $ativo ="";
+                $ativo = 1;
                 
                 if ($_GET["descricao"] != "") {
                     $dependentesFiltro = $_GET["descricao"];
                    $where = "AND descricao LIKE '%$dependentesFiltro%'";
                 }
+
 
                 if ($_POST['ativo'] != "") {
                     $ativo =  $_POST['ativo'];

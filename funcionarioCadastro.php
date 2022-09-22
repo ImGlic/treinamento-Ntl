@@ -138,7 +138,7 @@ include "inc/nav.php";
                                                                 <label class="label">Gênero</label>
                                                                 <label class="select">
                                                                     <select id="descricao" name="descricao">
-                                                                        <option ></option>
+                                                                        <option></option>
                                                                         <?php
                                                                         $reposit = new reposit();
                                                                         $sql = "SELECT codigo,descricao
@@ -415,7 +415,7 @@ include "inc/nav.php";
                                                                         <option value="SC">SC</option>
                                                                         <option value="SP">SP</option>
                                                                         <option value="SE">SE</option>
-                                                                        <option value="TO">TO</option>                                                                        
+                                                                        <option value="TO">TO</option>
                                                                     </select><i class="fa fa-sort-desc"></i>
                                                                 </label>
 
@@ -640,6 +640,7 @@ include "inc/scripts.php";
         $('#pisPasep').mask('999.999999.99.9');
 
         $('#dlgSimpleExcluir').dialog({
+
             autoOpen: false,
             width: 400,
             resizable: false,
@@ -728,17 +729,17 @@ include "inc/scripts.php";
 
             if (cpfDependente == "") {
                 smartAlert("Atenção", "Por favor, infor o CPf do Dependente!", "error")
-            } 
+            }
 
-            if  ( validarCPF() == false){                
+            if (validarCPF() == false) {
                 smartAlert("Atenção", "CPF inválido, não será possivel cadastrar", "error");
-                $("#cpfDependente").val('');                 
-            }else    if ((cpf && cpfDependente != "") && (cpf == cpfDependente)) {
+                $("#cpfDependente").val('');
+            } else if ((cpf && cpfDependente != "") && (cpf == cpfDependente)) {
                 smartAlert("Atenção", "CPF Titular igual o CPF do Dependente, Não será Possível Gravar", "error")
                 $("#cpfDependente").val('');
-            }else{
+            } else {
                 verificarCpfDependente(cpfDependente);
-            }                     
+            }
 
         });
 
@@ -802,6 +803,16 @@ include "inc/scripts.php";
 
         $("#btnVoltar").on("click", function() {
             voltar();
+        });
+
+        $("#nomeFuncionario").on('keydown', function(e) {
+            console.log(e.keyCode);            
+            var keycode = e.keyCode;
+            if (keycode == 51 || keycode == 222 || keycode == 56)  {
+                e.preventDefault();
+                $("#nomeFuncionario").val("");
+                
+            }
         });
 
         carregaPagina();
@@ -1070,7 +1081,7 @@ include "inc/scripts.php";
 
         for (i = jsonTelefoneArray.length - 1; i >= 0; i--) {
             if (numeroFuncionario !== "") {
-                if ((jsonTelefoneArray[i].telefone == numeroFuncionario) && (jsonTelefoneArray[i].sequencialTelefone != sequencial) ) {
+                if ((jsonTelefoneArray[i].telefone == numeroFuncionario) && (jsonTelefoneArray[i].sequencialTelefone != sequencial)) {
                     achouTelefone = true;
                 }
             }
@@ -1269,7 +1280,7 @@ include "inc/scripts.php";
         }
 
         if (achouEmail || achouPrincipal === true) {
-            samrtAlert("Atenção", "Email ou EmailPrincipal já existe na lista.", "error");
+            smartAlert("Atenção", "Email ou EmailPrincipal já existe na lista.", "error");
             $('#email').val("");
             return false;
         }
@@ -1401,12 +1412,19 @@ include "inc/scripts.php";
         var dependenteId = $('#dependenteId').val();
         var sequencial = $('#sequencialDependente').val();
         var cpfDependente = $('#cpfDependente').val();
+        var cpf = $('#cpf').val();
         var nascimentoDependente = $('#nascimentoDependente').val();
         var tipoDependente = $('#tipoDependente').val();
 
         if (!nomeDependente) {
             smartAlert("Atenção", "Preencha o Nome do Dependente", "error");
             return;
+        }
+
+        if (cpfDependente == cpf) {
+            smartAlert("Atenção", "Cpf do Dependente não pode ser igual o do funcionário", "error");
+            $('#cpfDependente').val("");
+            return false;
         }
 
         for (i = jsonDependenteArray.length - 1; i >= 0; i--) {

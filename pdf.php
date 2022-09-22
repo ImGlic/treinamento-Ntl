@@ -144,7 +144,7 @@ class PDF extends FPDF
 
         if ($_GET['estadoCivil'] != "") {
             $estadoCivil = $_GET['estadoCivil'];
-            $where = " AND estadoCivil = '$estadoCivil'";
+            $where .= " AND estadoCivil = '$estadoCivil'";
         }
 
         $sql = " SELECT f.codigo, f.nome, f.ativo, f.cpf, f.dataNascimento, f.genero, EC.descricao as descricaoEstadoCivil,    
@@ -728,9 +728,7 @@ class PDF extends FPDF
                     $pdf->setX(180);
                     $pdf->MultiCell(15, 6, iconv('UTF-8', 'windows-1252', 'IDADE'), 1, "C", 1);
                     $pdf->SetFont($tipoDeFonte, '', 8);
-
-
-                    foreach ($result as $row) {
+                   
 
                         $pdf->setY($i = $i + 5);
                         $pdf->SetFont($tipoDeFonte, $fontWeight, $tamanhoFonte);
@@ -761,7 +759,7 @@ class PDF extends FPDF
                         $pdf->setX(180);
                         $pdf->MultiCell(15, 5, $idadeDependente, 1, "C", 0);  //Cell(20, -1, iconv('UTF-8', 'windows-1252', $nome), 0, 0, "L", 0);
                         $pdf->SetFont($tipoDeFonte, '', 8);
-                    }
+                    
                 }
             }
 

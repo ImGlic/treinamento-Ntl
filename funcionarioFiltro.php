@@ -256,7 +256,7 @@ include "inc/scripts.php";
     function listarFiltro() {
         var nome = $('#nome').val();
         var cpf = $('#cpf').val();
-        var descricao = $('#descricao').val();
+        var estadoCivil = $('#estadoCivil').val();
         var dataInicio = $('#dataInicio').val();
         var dataFim = $('#dataFim').val();
         var genero = $('#genero').val();
@@ -271,7 +271,7 @@ include "inc/scripts.php";
             cpf = cpf.replace(/^\s+|\s+$/g, "");
             cpf = encodeURIComponent(cpf);
         }
-        var parametrosUrl = '&nome=' + nome + '&cpf=' + cpf + '&descricao=' + descricao + '&dataInicio=' + dataInicio + '&dataFim=' + dataFim + '&descricao=' + genero + '&ativo=' + ativo;
+        var parametrosUrl = '&nome=' + nome + '&cpf=' + cpf +  '&dataInicio=' + dataInicio + '&dataFim=' + dataFim + '&genero=' + genero + '&ativo=' + ativo + '&estadoCivil=' + estadoCivil;
         $('#resultadoBusca').load('funcionarioFiltroListagem.php?' + parametrosUrl);
     }
 

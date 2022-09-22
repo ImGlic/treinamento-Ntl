@@ -10,6 +10,7 @@ include "js/repositorio.php";
                     <th class="text-center" style="min-width:30px;">Data de Nascimento</th>
                     <th class="text-center" style="min-width:35px;">Ativo</th>
                     <th class="text-center" style="min-width:35px;">CPF</th>
+                    <th class="text-center" style="min-width:35px;">Estado civil</th>
                     <th class="text-center" style="min-width:35px;">Gênero</th>
                     <th class="text-center" style="min-width:35px;">Relatório</th>
 
@@ -22,12 +23,12 @@ include "js/repositorio.php";
 
                 if ($_GET["nome"] != "") {
                     $nomeFiltro = $_GET["nome"];
-                    $where = " AND nome LIKE '%$nomeFiltro%'";
+                    $where .= " AND nome LIKE '%$nomeFiltro%'";
                 }
 
                 if ($_GET["cpf"] != "") {
                     $cpfFiltro = $_GET["cpf"];
-                    $where = " AND cpf = '$cpfFiltro'";
+                    $where .= " AND cpf = '$cpfFiltro'";
                 }
 
                 $dataInicio = $_GET["dataInicio"];
@@ -46,40 +47,41 @@ include "js/repositorio.php";
                 }
 
                 if (($campo1  && $campo2)) {
-                    $where = " AND dataNascimento BETWEEN '$campo1' AND '$campo2'";
+                    $where .= " AND dataNascimento BETWEEN '$campo1' AND '$campo2'";
                 }
                 if ((!$campo1 && $campo2)) {
-                    $where = "AND dataNascimento <= '$campo2'";
+                    $where .= "AND dataNascimento <= '$campo2'";
                 }
                 if (($campo1 && !$campo2)) {
-                    $where = " AND dataNascimento >= '$campo1'";
+                    $where .= " AND dataNascimento >= '$campo1'";
                 }
 
                 if ($_GET['genero'] != "") {
                     $genero = $_GET['genero'];
-                    $where = " AND genero = '$genero'";
+                    $where .=  " AND genero = $genero";
                 }
 
-                if ($_GET['descricaoEstadoCivil'] != "") {
-                    $estadoCivil = $_GET['descricaoEstadoCivil'];
-                    $where = " AND estadoCivil = '$estadoCivil'";
+                if ($_GET['estadoCivil'] != "") {
+                    $estadoCivil = $_GET['estadoCivil'];
+                    $where .=  " AND estadoCivil = $estadoCivil";
                 }
 
                 if ($_GET['ativo'] != "") {
                     $ativo =  $_GET['ativo'];
                     if ($ativo == 1) {
-                        $where = "AND ativo = '$ativo'";
+                        $where .= "AND ativo = $ativo";
                     }
                     if ($ativo == 0) {
-                        $where = "AND ativo = '$ativo'";
+                        $where .= "AND ativo = $ativo";
                     }
                 }
 
 
                 $sql = " SELECT f.codigo, f.nome, f.ativo, f.cpf, f.dataNascimento, f.genero , f.estadoCivil,
-                GF.descricao from dbo.funcionario f
+                GF.descricao, Ef.descricao as estadoCivil from dbo.funcionario f
                 LEFT JOIN dbo.desc_genero GF on f.genero = GF.codigo
-                
+                LEFT JOIN dbo.estadoCivil EF ON f.estadoCivil= EF.codigo
+
                 WHERE (0=0)";                      
                 
                 $sql = $sql . $where;
@@ -113,6 +115,7 @@ include "js/repositorio.php";
                     echo '<td class="text-center">' . $campo . '</td>';
                     echo '<td class="text-center">' . $descricaoAtivo . '</td>';
                     echo '<td class="text-center">' . $cpf . '</td>';
+                    echo '<td class="text-center">' . $estadoCivil . '</td>';
                     echo '<td class="text-center">' . $genero . '</td>';
                     echo '<td class="text-center"><a href=pdf.php?function=dadosFuncionario&id='. $id .'><button type="button" style=< id ="btnPdf" class="btn btn-danger" aria-hidden="true" title="Abrir Pdf">
                     <span class="fa fa-file-pdf-o"></span>
